@@ -11,8 +11,6 @@
     
 4.  Execute o arquivo Python usando o seguinte comando:
     
-    Copy code
-    
     `python detect_faces.py` 
     
 5.  Isso abrirá a webcam do seu computador e começará a detectar rostos em tempo real. Siga as instruções na janela da webcam para associar nomes aos rostos detectados.
