@@ -3,7 +3,7 @@
     
   1.  Certifique-se de ter o Python e a biblioteca OpenCV instalados no seu ambiente. Você pode instalar o OpenCV usando o seguinte comando pip:
      
-    `pip install opencv-python` 
+    " pip install opencv-python " 
     
 2.  Copie o código fornecido para um arquivo Python (por exemplo, `detect_faces.py`).
     
