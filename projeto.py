@@ -1,4 +1,7 @@
+from flask import Flask, render_template, Response
 import cv2
+
+app = Flask(__name__)
 
 # Função para detecção de rostos em um frame de vídeo
 def detect_faces(frame):
@@ -13,8 +16,8 @@ def detect_faces(frame):
 
     return faces
 
-# Função para exibir o vídeo com os rostos detectados e permitir que o usuário associe nomes
-def annotate_faces():
+# Função para gerar os frames do vídeo com os rostos detectados
+def generate_frames():
     # Inicializar o objeto de captura de vídeo
     cap = cv2.VideoCapture(0)
 
@@ -30,20 +33,23 @@ def annotate_faces():
             # Desenhar um retângulo ao redor do rosto
             cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
 
-            # Exibir um campo de texto para o usuário inserir o nome associado ao rosto
-            name = input("Digite o nome associado a este rosto: ")
-            cv2.putText(frame, name, (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+        # Converter o frame em um formato que possa ser enviado como resposta HTTP
+        ret, buffer = cv2.imencode('.jpg', frame)
+        frame = buffer.tobytes()
 
-        # Exibir o frame com os rostos detectados e os nomes associados
-        cv2.imshow("Faces Anotadas", frame)
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
-        # Aguardar a tecla 'q' ser pressionada para sair do loop
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-
-    # Liberar o objeto de captura de vídeo e fechar todas as janelas
+    # Liberar o objeto de captura de vídeo
     cap.release()
-    cv2.destroyAllWindows()
 
-# Chamar a função para detectar rostos e associar nomes
-annotate_faces()
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/video_feed')
+def video_feed():
+    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+if __name__ == '__main__':
+    app.run(debug=True)
