@@ -1,0 +1,33 @@
+Pré-requisitos:
+Python: Certifique-se de ter o Python instalado. Se ainda não tiver, baixe e instale-o do site oficial: Python Downloads.
+OpenCV: Instale a biblioteca opencv-python, que é necessária para o script funcionar. Você pode instalar o pacote usando pip com o comando:
+Copiar código
+pip install opencv-python
+Executando o Script:
+Salve o Script em um Arquivo: Salve o código Python fornecido anteriormente em um arquivo com a extensão .py, por exemplo, face_annotation.py.
+
+Abra o Terminal ou Prompt de Comando:
+
+No Windows: Pressione Win + R, digite cmd e pressione Enter.
+No macOS ou Linux: Abra o Terminal pelo seu aplicativo de busca ou através do Finder.
+Navegue até o Diretório do Arquivo: Use o comando cd para acessar o diretório onde o script foi salvo. Por exemplo:
+
+
+Copiar código
+cd caminho/para/seu/arquivo
+Onde caminho/para/seu/arquivo é o diretório onde você salvou o arquivo face_annotation.py.
+
+Execute o Script: Execute o script usando o comando Python:
+
+Copiar código
+python face_annotation.py
+ou, se você estiver usando o Python 3 especificamente:
+
+Copiar código
+python3 face_annotation.py
+Interaja com o Script:
+
+Quando o script iniciar, ele abrirá a webcam e começará a detectar rostos.
+Para cada rosto detectado, ele solicitará que você insira um nome no terminal.
+Após rotular os rostos, o vídeo será exibido com retângulos ao redor dos rostos e os nomes associados.
+Para sair do loop e fechar o programa, pressione a tecla q no teclado.
